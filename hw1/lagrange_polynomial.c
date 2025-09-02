@@ -6,14 +6,14 @@ double computeLagrange(double x, int n, double nodes[], double values[]) {
     double result = 0.0;
 
     for (int i = 0; i < n; i++) {
-        double term = values[i];
+        double tmp = values[i];
         for (int j = 0; j < n; j++) {
             if (j != i) {
-                term *= (x - nodes[j]) / (nodes[i] - nodes[j]);
+                tmp *= (x - nodes[j]) / (nodes[i] - nodes[j]);
             }
         }
 
-        result += term;
+        result += tmp;
     }
 
     return result;
@@ -21,9 +21,10 @@ double computeLagrange(double x, int n, double nodes[], double values[]) {
 
 int main(int argc, char *argv[]) {
     double h = atof(argv[1]);
-    int n = atoi(argv[2]);
     double a = -1.0;
-    // double b = 1.0;
+    double b = 1.0;
+    int n = (int)((b - a) / h) + 1;
+    
 
     double nodes[n];
     double values[n];
