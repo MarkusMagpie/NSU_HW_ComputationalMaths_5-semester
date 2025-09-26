@@ -14,6 +14,11 @@ def sign(x):
     else:
         return 1
 
+# дискриминант производной кубического уравнения: f'(x) = 3x^2 + 2ax + b 
+# D = (2a)^2 - 4*3*b
+def discriminant_derivative(a, b):
+    return 4 * a ** 2 - 12 * b
+
 # бисекция для поиска корня на отрезке [a, b]
 def bisectional_root_search(a, b, c1, c2, c3):
     # разные знаки f(a) и f(b) - условие существования корня!
@@ -31,11 +36,6 @@ def bisectional_root_search(a, b, c1, c2, c3):
         return bisectional_root_search(m, b, c1, c2, c3)
     elif sign(f(m, c1, c2, c3)) != sign(f(a, c1, c2, c3)):
         return bisectional_root_search(a, m, c1, c2, c3)
-
-# дискриминант производной кубического уравнения: f'(x) = 3x^2 + 2ax + b 
-# D = (2a)^2 - 4*3*b
-def discriminant_derivative(a, b):
-    return 4 * a ** 2 - 12 * b
 
 # поиск отрезка где функция имеет на концх разные знаки -> наличие корня
 def find_interval(left_bound, right_bound, direction, a, b, c):
@@ -68,7 +68,7 @@ def find_multiple_roots(a, b, c):
     f_x2 = f(x_2, a, b, c)
 
     if abs(f_x1) <= epsilon and abs(f_x2) <= epsilon:
-        return [x_1]
+        return [x_1, x_2]
     if abs(f_x1) <= epsilon:
         return [x_1, find_interval(x_2, x_2 + 1, right, a, b, c)]
     if abs(f_x2) <= epsilon:
